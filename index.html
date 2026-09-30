@@ -1,0 +1,1956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RageQuest Web™ // Enterprise Friction & Anti-User Portal v99.4</title>
+  
+  <!-- Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       RAGEQUEST WEB™ - HIGH-TECH SMUG CORPORATE DESIGN SYSTEM
+       ========================================================================== */
+    :root {
+      --bg-dark: #090d16;
+      --bg-card: rgba(17, 24, 39, 0.85);
+      --bg-card-hover: rgba(30, 41, 59, 0.9);
+      --bg-glass: rgba(15, 23, 42, 0.75);
+      --bg-glass-accent: rgba(239, 68, 68, 0.08);
+
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(99, 102, 241, 0.35);
+      --border-rage: rgba(239, 68, 68, 0.5);
+
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --accent-rage: #ef4444;
+      --accent-rage-glow: #f87171;
+      --accent-warning: #f59e0b;
+      --accent-success: #10b981;
+      --accent-cyan: #06b6d4;
+      --accent-purple: #a855f7;
+
+      --text-main: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-dim: #64748b;
+      --text-rage: #fca5a5;
+
+      --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-code: 'Fira Code', monospace;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-pill: 9999px;
+
+      --shadow-base: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+      --shadow-rage: 0 0 40px rgba(239, 68, 68, 0.25);
+      --shadow-cyan: 0 0 35px rgba(6, 182, 212, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(239, 68, 68, 0.1) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.05) 0%, transparent 60%);
+      background-attachment: fixed;
+    }
+
+    /* Scanline effect for smug hacker corporate feel */
+    body::before {
+      content: " ";
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+      background-size: 100% 4px;
+      z-index: 999;
+      pointer-events: none;
+      opacity: 0.35;
+    }
+
+    /* Container Layout */
+    .app-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 24px 20px 80px 20px;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 28px;
+    }
+
+    @media (max-width: 1024px) {
+      .app-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Top Navigation Bar */
+    .header-bar {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 16px 28px;
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow-base);
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #ef4444, #f59e0b, #6366f1);
+      border-radius: var(--radius-md);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+      animation: pulseBrand 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseBrand {
+      0% { transform: scale(1) rotate(0deg); }
+      100% { transform: scale(1.05) rotate(5deg); }
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(to right, #ffffff, #a5b4fc, #fca5a5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-badge {
+      font-size: 10px;
+      font-family: var(--font-code);
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid var(--border-rage);
+      color: var(--accent-rage-glow);
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .header-stats {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .stat-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .stat-pill strong {
+      color: var(--text-main);
+    }
+
+    /* Sidebar: Smug AI Host & Rage Telemetry */
+    .sidebar-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow-base);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    }
+
+    /* AI Host Avatar Card */
+    .host-card {
+      text-align: center;
+      border: 1px solid var(--border-glow);
+      box-shadow: var(--shadow-cyan);
+    }
+
+    .host-avatar-wrapper {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 16px auto;
+    }
+
+    .host-avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1e1b4b, #312e81);
+      border: 3px solid var(--accent-cyan);
+      display: grid;
+      place-items: center;
+      font-size: 46px;
+      position: relative;
+      box-shadow: 0 0 25px rgba(6, 182, 212, 0.4);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .host-avatar.speaking {
+      animation: avatarBounce 0.4s infinite alternate;
+      border-color: var(--accent-warning);
+    }
+
+    .host-avatar.mocking {
+      animation: avatarMock 0.6s ease infinite alternate;
+      border-color: var(--accent-rage);
+    }
+
+    @keyframes avatarBounce {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-6px) scale(1.06); }
+    }
+
+    @keyframes avatarMock {
+      0% { transform: rotate(-8deg) scale(1.05); }
+      100% { transform: rotate(8deg) scale(1.05); }
+    }
+
+    .host-status-dot {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      width: 18px;
+      height: 18px;
+      background: #10b981;
+      border: 3px solid var(--bg-dark);
+      border-radius: 50%;
+      box-shadow: 0 0 10px #10b981;
+    }
+
+    .host-name {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .host-role {
+      font-size: 12px;
+      color: var(--accent-cyan);
+      font-family: var(--font-code);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+
+    .host-speech-bubble {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-glow);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: #e2e8f0;
+      text-align: left;
+      position: relative;
+      min-height: 72px;
+    }
+
+    .host-speech-bubble::before {
+      content: '';
+      position: absolute;
+      top: -7px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 12px;
+      height: 12px;
+      background: rgba(15, 23, 42, 0.9);
+      border-left: 1px solid var(--border-glow);
+      border-top: 1px solid var(--border-glow);
+    }
+
+    /* Rage Meter Card */
+    .rage-meter-container {
+      margin-top: 8px;
+    }
+
+    .meter-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+    }
+
+    .rage-progress-bar {
+      height: 14px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      position: relative;
+    }
+
+    .rage-fill {
+      height: 100%;
+      width: 24%;
+      background: linear-gradient(90deg, #10b981, #f59e0b, #ef4444, #dc2626);
+      background-size: 300% 100%;
+      border-radius: var(--radius-pill);
+      transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+    }
+
+    .rage-subtitle {
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    /* Sound and TTS controls */
+    .audio-toggles {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .btn-toggle {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      border-radius: var(--radius-pill);
+      padding: 6px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-toggle:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+    }
+
+    .btn-toggle.active {
+      background: rgba(99, 102, 241, 0.2);
+      border-color: var(--primary);
+      color: #c7d2fe;
+    }
+
+    /* Main Console / Gateway Area */
+    .main-workspace {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* URL / Goal Bar */
+    .url-bar-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 12px 20px;
+    }
+
+    .url-lock-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--accent-rage-glow);
+      border: 1px solid var(--border-rage);
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .url-input-box {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 8px 16px;
+      font-family: var(--font-code);
+      font-size: 14px;
+      color: #94a3b8;
+    }
+
+    .url-input-box span.protocol {
+      color: var(--text-dim);
+    }
+    
+    .url-input-box span.target {
+      color: #38bdf8;
+      font-weight: 600;
+    }
+
+    .btn-preset {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      border-radius: var(--radius-md);
+      padding: 8px 14px;
+      font-size: 12.5px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-preset:hover {
+      background: rgba(99, 102, 241, 0.2);
+      border-color: var(--primary);
+      color: var(--text-main);
+    }
+
+    /* Target Selector Presets Carousel */
+    .preset-pill-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .preset-chip {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .preset-chip:hover, .preset-chip.active {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: var(--primary);
+      color: #e0e7ff;
+      transform: translateY(-1px);
+    }
+
+    /* Active Gate Arena */
+    .gate-arena {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glow);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      position: relative;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gate-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .gate-badge-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .gate-tag {
+      font-size: 11px;
+      font-family: var(--font-code);
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--accent-rage-glow);
+      border: 1px solid var(--border-rage);
+    }
+
+    .gate-security-level {
+      font-size: 11px;
+      color: var(--accent-warning);
+      font-family: var(--font-code);
+    }
+
+    .gate-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .gate-progress-stepper {
+      display: flex;
+      gap: 8px;
+    }
+
+    .step-node {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-dim);
+      transition: all 0.3s;
+    }
+
+    .step-node.active {
+      background: var(--primary);
+      border-color: #a5b4fc;
+      color: #ffffff;
+      box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+    }
+
+    .step-node.cleared {
+      background: var(--accent-success);
+      border-color: #6ee7b7;
+      color: #ffffff;
+    }
+
+    /* Gate Body Styles */
+    .gate-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .instructions-box {
+      background: rgba(0, 0, 0, 0.3);
+      border-left: 4px solid var(--accent-cyan);
+      padding: 16px 20px;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      margin-bottom: 24px;
+    }
+
+    .instructions-box p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #cbd5e1;
+    }
+
+    .instructions-box strong {
+      color: #38bdf8;
+    }
+
+    .instructions-box ul {
+      margin-top: 10px;
+      margin-left: 20px;
+      font-size: 13.5px;
+      color: #94a3b8;
+    }
+
+    .instructions-box li {
+      margin-bottom: 6px;
+    }
+
+    /* Interactive Inputs & Buttons */
+    .game-input-area {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .text-entry {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      color: #ffffff;
+      font-size: 16px;
+      font-family: var(--font-body);
+      outline: none;
+      transition: all 0.25s;
+    }
+
+    .text-entry:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .text-entry.error-shake {
+      animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      border-color: var(--accent-rage);
+    }
+
+    @keyframes shake {
+      10%, 90% { transform: translate3d(-2px, 0, 0); }
+      20%, 80% { transform: translate3d(4px, 0, 0); }
+      30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+      40%, 60% { transform: translate3d(6px, 0, 0); }
+    }
+
+    .live-telemetry-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-code);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .live-telemetry-strip span.valid {
+      color: var(--accent-success);
+    }
+
+    .live-telemetry-strip span.invalid {
+      color: var(--accent-rage);
+    }
+
+    .btn-submit-gate {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 16px 32px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s;
+      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.35);
+    }
+
+    .btn-submit-gate:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(99, 102, 241, 0.5);
+    }
+
+    .btn-submit-gate:active {
+      transform: translateY(1px);
+    }
+
+    /* GATE SPECIFIC: Moving Button Playfield */
+    .moving-target-arena {
+      position: relative;
+      height: 280px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 2px dashed rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .evasive-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #ffffff;
+      font-weight: 800;
+      padding: 12px 24px;
+      border-radius: var(--radius-pill);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+      transition: top 0.18s ease-out, left 0.18s ease-out, transform 0.15s ease;
+      user-select: none;
+    }
+
+    .decoy-button {
+      position: absolute;
+      background: rgba(239, 68, 68, 0.8);
+      color: #ffffff;
+      font-size: 12px;
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      border: none;
+      cursor: pointer;
+    }
+
+    /* GATE SPECIFIC: Bureaucratic Rapid Tapper */
+    .tapper-meter-box {
+      margin: 20px 0;
+    }
+
+    .server-health-bar {
+      height: 24px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .server-health-fill {
+      height: 100%;
+      width: 60%;
+      background: linear-gradient(90deg, #ef4444, #f59e0b, #10b981);
+      transition: width 0.1s linear;
+    }
+
+    .server-health-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 11px;
+      font-weight: 800;
+      font-family: var(--font-code);
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+    }
+
+    /* GATE SPECIFIC: Absurd Cookie Consent Modal */
+    .cookie-nest-container {
+      max-height: 220px;
+      overflow-y: auto;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 16px;
+    }
+
+    .cookie-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 13px;
+    }
+
+    .cookie-toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+    }
+
+    .cookie-toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider-toggle {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #475569;
+      border-radius: 24px;
+      transition: .3s;
+    }
+
+    .slider-toggle:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      border-radius: 50%;
+      transition: .3s;
+    }
+
+    input:checked + .slider-toggle {
+      background-color: #ef4444;
+    }
+
+    input:checked + .slider-toggle:before {
+      transform: translateX(20px);
+    }
+
+    /* Unlocked Content Showcase Modal / Section */
+    .unlocked-page-card {
+      background: linear-gradient(135deg, rgba(30, 27, 75, 0.95), rgba(15, 23, 42, 0.95));
+      border: 2px solid #a855f7;
+      box-shadow: 0 0 50px rgba(168, 85, 247, 0.35);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      text-align: center;
+      animation: unlockGlow 1s ease-out;
+    }
+
+    @keyframes unlockGlow {
+      0% { transform: scale(0.92); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .unlocked-badge {
+      display: inline-block;
+      background: rgba(168, 85, 247, 0.2);
+      border: 1px solid #a855f7;
+      color: #e9d5ff;
+      font-weight: 800;
+      padding: 6px 18px;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .unlocked-title {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 800;
+      background: linear-gradient(to right, #f472b6, #c084fc, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+    }
+
+    .unlocked-content-body {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #e2e8f0;
+      margin: 20px 0 28px 0;
+      text-align: left;
+    }
+
+    /* Console Terminal Output */
+    .terminal-card {
+      background: #050811;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      font-family: var(--font-code);
+      font-size: 12px;
+    }
+
+    .terminal-header {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .terminal-logs {
+      max-height: 120px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      color: #94a3b8;
+    }
+
+    .terminal-log-line {
+      display: flex;
+      gap: 8px;
+    }
+
+    .terminal-log-line .timestamp {
+      color: #475569;
+    }
+
+    .terminal-log-line .log-tag {
+      color: #38bdf8;
+    }
+
+    .terminal-log-line .log-msg-error {
+      color: #f87171;
+    }
+
+    .terminal-log-line .log-msg-smug {
+      color: #fde047;
+    }
+
+    /* Confetti Particle Canvas */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="app-container">
+    
+    <!-- TOP HEADER -->
+    <header class="header-bar">
+      <div class="brand-section">
+        <div class="brand-icon">🔥</div>
+        <div>
+          <div class="brand-title">RageQuest Web™</div>
+          <span class="brand-badge">Friction-First Architecture v99.4</span>
+        </div>
+      </div>
+
+      <div class="header-stats">
+        <div class="stat-pill">
+          <span>Failed Attempts:</span>
+          <strong id="stat-fails" style="color: var(--accent-rage);">0</strong>
+        </div>
+        <div class="stat-pill">
+          <span>Dignity Remaining:</span>
+          <strong id="stat-dignity" style="color: #f59e0b;">100%</strong>
+        </div>
+        <div class="stat-pill">
+          <span>Pages Unlocked:</span>
+          <strong id="stat-unlocked" style="color: #10b981;">0 / 5</strong>
+        </div>
+      </div>
+    </header>
+
+    <!-- SIDEBAR: SMUG AI HOST & RAGE TELEMETRY -->
+    <aside class="sidebar-panel">
+      <!-- AI Host Card -->
+      <div class="card host-card">
+        <div class="host-avatar-wrapper">
+          <div id="host-avatar" class="host-avatar">🤖</div>
+          <div class="host-status-dot"></div>
+        </div>
+        <div class="host-name">S.M.U.G. AI Host</div>
+        <div class="host-role">Synthetic Moderation & User Gating</div>
+
+        <div class="host-speech-bubble" id="host-speech">
+          "Welcome to RageQuest Web! I've placed our state-of-the-art security gate between you and your webpage. You're going to love our safety standards!"
+        </div>
+
+        <div class="audio-toggles">
+          <button id="btn-toggle-sound" class="btn-toggle active" title="Toggle 8-bit Audio Synth Effects">
+            🔊 Sound FX: ON
+          </button>
+          <button id="btn-toggle-voice" class="btn-toggle active" title="Toggle AI Text-To-Speech">
+            🗣️ Host Voice: ON
+          </button>
+        </div>
+      </div>
+
+      <!-- Realtime Rage Telemetry -->
+      <div class="card">
+        <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span>⚡</span> User Aggravation Index
+        </h4>
+        <div class="rage-meter-container">
+          <div class="meter-label-row">
+            <span>Calm Consumer</span>
+            <span id="rage-percent-label" style="color: var(--accent-rage); font-weight: 700;">22% Mild</span>
+          </div>
+          <div class="rage-progress-bar">
+            <div id="rage-progress-fill" class="rage-fill" style="width: 22%;"></div>
+          </div>
+          <div class="rage-subtitle" id="rage-descriptor">
+            Detecting standard polite keyboard cadence. Preparing annoyance escalation...
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Server Syslog -->
+      <div class="terminal-card">
+        <div class="terminal-header">
+          <span>/var/log/rage_audit.log</span>
+          <span>LIVE</span>
+        </div>
+        <div class="terminal-logs" id="terminal-logs">
+          <div class="terminal-log-line">
+            <span class="timestamp">[14:39:01]</span>
+            <span class="log-tag">[INIT]</span>
+            <span>Security firewall active.</span>
+          </div>
+          <div class="terminal-log-line">
+            <span class="timestamp">[14:39:02]</span>
+            <span class="log-tag">[GATE]</span>
+            <span class="log-msg-smug">User blocked from direct access.</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN INTERACTIVE GATEWAY -->
+    <main class="main-workspace">
+      
+      <!-- Target Requested Page Bar -->
+      <div class="url-bar-card">
+        <div class="url-lock-badge">🔒 ACCESS LOCKED</div>
+        <div class="url-input-box">
+          <span class="protocol">https://ragequest.io/target/</span>
+          <span class="target" id="current-target-name">secret-ai-source-code.md</span>
+        </div>
+      </div>
+
+      <!-- Target Presets Row -->
+      <div class="preset-pill-row">
+        <span style="font-size: 12px; color: var(--text-dim); margin-right: 4px;">Locked Destinations:</span>
+        <button class="preset-chip active" data-target="secret-ai" data-label="Secret AI Source Code">🤖 Secret AI Source Code</button>
+        <button class="preset-chip" data-target="cat-database" data-label="Classified Cat Memes">🐱 Classified Cat Memes</button>
+        <button class="preset-chip" data-target="ceo-salary" data-label="Executive Salary & Bonus List">💰 Executive Salaries</button>
+        <button class="preset-chip" data-target="ram-download" data-label="Download 128GB RTX 5090 RAM">🚀 Download 128GB RAM</button>
+        <button class="preset-chip" data-target="meaning-life" data-label="The Meaning of the Universe">🌌 Meaning of Life</button>
+      </div>
+
+      <!-- DYNAMIC GATE CONTAINER -->
+      <div id="gate-mount" class="gate-arena">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- SCRIPT: GAME ENGINE, SOUND SYNTH, VOICE, AND GATES -->
+  <script>
+    /* ==========================================================================
+       AUDIO SYNTHESIZER (WEB AUDIO API - ZERO EXTERNAL ASSETS REQUIRED)
+       ========================================================================== */
+    class RageAudioSynth {
+      constructor() {
+        this.ctx = null;
+        this.soundEnabled = true;
+        this.voiceEnabled = true;
+      }
+
+      initContext() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          this.ctx = new AudioContext();
+        }
+        if (this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      playBuzzer() {
+        if (!this.soundEnabled) return;
+        this.initContext();
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(140, this.ctx.currentTime);
+        osc.frequency.linearRampToValueAtTime(70, this.ctx.currentTime + 0.35);
+
+        gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + 0.35);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.36);
+      }
+
+      playSuccess() {
+        if (!this.soundEnabled) return;
+        this.initContext();
+        const notes = [440, 554, 659, 880];
+        notes.forEach((freq, idx) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, this.ctx.currentTime + (idx * 0.08));
+          gain.gain.setValueAtTime(0.2, this.ctx.currentTime + (idx * 0.08));
+          gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + (idx * 0.08) + 0.25);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(this.ctx.currentTime + (idx * 0.08));
+          osc.stop(this.ctx.currentTime + (idx * 0.08) + 0.26);
+        });
+      }
+
+      playBlip() {
+        if (!this.soundEnabled) return;
+        this.initContext();
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(600 + Math.random() * 400, this.ctx.currentTime);
+        gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + 0.08);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.09);
+      }
+
+      playTeleport() {
+        if (!this.soundEnabled) return;
+        this.initContext();
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(300, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1200, this.ctx.currentTime + 0.18);
+        gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + 0.18);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.19);
+      }
+
+      speak(text) {
+        if (!this.voiceEnabled || !window.speechSynthesis) return;
+        window.speechSynthesis.cancel(); // Stop any pending speech
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 1.1;
+        utterance.pitch = 1.25; // Slightly high-pitched smug assistant voice
+        
+        const avatar = document.getElementById('host-avatar');
+        utterance.onstart = () => avatar.classList.add('speaking');
+        utterance.onend = () => avatar.classList.remove('speaking');
+        utterance.onerror = () => avatar.classList.remove('speaking');
+        
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    const audio = new RageAudioSynth();
+
+    /* ==========================================================================
+       APP STATE & RAGE ENGINE
+       ========================================================================== */
+    const State = {
+      currentTargetId: 'secret-ai',
+      currentTargetLabel: 'Secret AI Source Code',
+      currentGateIndex: 0,
+      failedAttempts: 0,
+      dignity: 100,
+      unlockedCount: 0,
+      rageScore: 22,
+      lastKeystrokes: [],
+      mouseJitterCount: 0
+    };
+
+    const TARGET_PAYLOADS = {
+      'secret-ai': {
+        title: "TOP SECRET: Artificial Superintelligence Master Algorithm",
+        snippet: "function calculateHumanDestiny() {\n  // Proprietary Google DeepMind Neural Warp Core\n  const answer = 42;\n  const smugness = Infinity;\n  return 'Congratulations! You solved all gates just to discover the AI code was 3 console.log statements and a setTimeout.';\n}"
+      },
+      'cat-database': {
+        title: "CLASSIFIED: Level 5 High-Definition Cat Memes",
+        snippet: "🐱 [ENCRYPTED FELINE TELEMETRY]\n- Cat #001: Demands food 3 minutes after being fed.\n- Cat #002: Slaps glass off desk while looking directly into your eyes.\n- Cat #003: Successfully hacks mainframe using 4 paws on spacebar."
+      },
+      'ceo-salary': {
+        title: "CONFIDENTIAL: Executive Compensation & Golden Parachute Ledger",
+        snippet: "💰 CEO Base Salary: $1.00\n💰 CEO Stock Compensation: $492,000,000.00\n💰 Annual Budget for 'Smug Security Gate Development': $12,000,000.00\n💰 Free Kombucha in Breakroom: Suspended due to market conditions."
+      },
+      'ram-download': {
+        title: "HARDWARE PROVISIONING: RTX 5090 128GB Cloud GDDR7",
+        snippet: "🚀 RAM Successfully Injected into Local Browser Cookies!\n- VRAM: 128,000 MB allocated.\n- Fan Speed: 14,000 RPM (Simulated via high-frequency motherboard hum).\n- Latency: -0.4ms (Time traveling cache)."
+      },
+      'meaning-life': {
+        title: "COSMIC QUERY: The Fundamental Purpose of Sentient Existence",
+        snippet: "🌌 Answer: The meaning of life is spending 14 minutes proving to a smug AI host that you can type without using the letter 'E' while a button runs away from your cursor."
+      }
+    };
+
+    /* Smug Commentary Generator */
+    const SMUG_TAUNTS = [
+      "Oh honey, no. Did you really think that satisfied paragraph 4 subsection B of our compliance policy?",
+      "That attempt was so delightfully close! (If by close you mean 100% invalid). Try again! 😊",
+      "I love how hard you're trying. Our servers are warming up to reject your next input with equal enthusiasm!",
+      "Aww, look at you getting flustered! Take a deep breath, count to ten, and obey our arbitrary rules.",
+      "Access denied! Don't worry, every failed attempt increases our executive bonuses by $0.03!",
+      "Protocol violation detected! Remember, our security is designed for YOUR safety and MY amusement."
+    ];
+
+    function setHostSpeech(text, isMocking = false) {
+      const speechEl = document.getElementById('host-speech');
+      const avatar = document.getElementById('host-avatar');
+      speechEl.innerText = `"${text}"`;
+      
+      if (isMocking) {
+        avatar.classList.add('mocking');
+        setTimeout(() => avatar.classList.remove('mocking'), 1200);
+      }
+      audio.speak(text);
+      logTerminal('SMUG_AI', text, isMocking ? 'smug' : 'normal');
+    }
+
+    function recordFailure(reason) {
+      State.failedAttempts++;
+      State.dignity = Math.max(0, State.dignity - 8);
+      State.rageScore = Math.min(100, State.rageScore + 12);
+      
+      document.getElementById('stat-fails').innerText = State.failedAttempts;
+      document.getElementById('stat-dignity').innerText = `${State.dignity}%`;
+      updateRageMeter();
+      
+      audio.playBuzzer();
+      logTerminal('SECURITY_DENIAL', reason, 'error');
+
+      const randomTaunt = SMUG_TAUNTS[Math.floor(Math.random() * SMUG_TAUNTS.length)];
+      setHostSpeech(randomTaunt, true);
+    }
+
+    function recordSuccess(msg) {
+      audio.playSuccess();
+      logTerminal('GATE_CLEARED', msg, 'normal');
+      setHostSpeech("Incredible compliance! I am genuinely disappointed you succeeded. Let's make the next gate much worse!", false);
+    }
+
+    function updateRageMeter() {
+      const fill = document.getElementById('rage-progress-fill');
+      const label = document.getElementById('rage-percent-label');
+      const desc = document.getElementById('rage-descriptor');
+      
+      fill.style.width = `${State.rageScore}%`;
+      
+      if (State.rageScore < 35) {
+        label.innerText = `${State.rageScore}% Mild`;
+        label.style.color = 'var(--accent-success)';
+        desc.innerText = "Subject appears docile. Ready for micro-annoyance injections.";
+      } else if (State.rageScore < 70) {
+        label.innerText = `${State.rageScore}% Agitated`;
+        label.style.color = 'var(--accent-warning)';
+        desc.innerText = "Elevated click speed detected. Smugness index performing at 140% efficiency.";
+      } else {
+        label.innerText = `${State.rageScore}% MAXIMUM SEETHING`;
+        label.style.color = 'var(--accent-rage)';
+        desc.innerText = "CRITICAL RAGE DETECTED! Preparing elevator muzak and unnecessary confirmation dialogs!";
+      }
+    }
+
+    function logTerminal(tag, msg, type = 'normal') {
+      const logs = document.getElementById('terminal-logs');
+      const row = document.createElement('div');
+      row.className = 'terminal-log-line';
+      
+      const now = new Date();
+      const timeStr = `[${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}]`;
+      
+      let msgClass = '';
+      if (type === 'error') msgClass = 'log-msg-error';
+      if (type === 'smug') msgClass = 'log-msg-smug';
+
+      row.innerHTML = `
+        <span class="timestamp">${timeStr}</span>
+        <span class="log-tag">[${tag}]</span>
+        <span class="${msgClass}">${escapeHtml(msg)}</span>
+      `;
+      logs.appendChild(row);
+      logs.scrollTop = logs.scrollHeight;
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    /* ==========================================================================
+       THE 5 INFURIATING GATES IMPLEMENTATION
+       ========================================================================== */
+    const GATES = [
+      
+      /* --- GATE 0: The Precise 13-Word Banana Politeness Gate --- */
+      {
+        title: "Gate 1: The '13-Word Banana' Security Clearance",
+        tag: "COMPLIANCE CHECK 001",
+        securityLevel: "SEC LEVEL: PETTY",
+        render: function(mount) {
+          mount.innerHTML = `
+            <div class="gate-header">
+              <div>
+                <div class="gate-badge-group">
+                  <span class="gate-tag">${this.tag}</span>
+                  <span class="gate-security-level">${this.securityLevel}</span>
+                </div>
+                <div class="gate-title">${this.title}</div>
+              </div>
+              <div class="gate-progress-stepper">
+                <div class="step-node active">1</div>
+                <div class="step-node">2</div>
+                <div class="step-node">3</div>
+                <div class="step-node">4</div>
+                <div class="step-node">5</div>
+              </div>
+            </div>
+
+            <div class="gate-body">
+              <div class="instructions-box">
+                <p>To establish your initial connection to <strong>${State.currentTargetLabel}</strong>, our firewall requires a handwritten authentication token meeting exact semantic specifications:</p>
+                <ul>
+                  <li>Your sentence must be <strong>EXACTLY 13 words long</strong> (no more, no less).</li>
+                  <li>You must include the word <strong>"bananas"</strong> somewhere in your request.</li>
+                  <li>You must specify what page you are trying to view.</li>
+                </ul>
+              </div>
+
+              <div class="game-input-area">
+                <input type="text" id="banana-input" class="text-entry" placeholder="e.g., I demand access to the secret code and please bring three yellow bananas" autocomplete="off" />
+                
+                <div class="live-telemetry-strip">
+                  <span>Live Word Count: <strong id="telemetry-words" class="invalid">0 / 13</strong></span>
+                  <span>Banana Token Present: <strong id="telemetry-banana" class="invalid">NO ❌</strong></span>
+                  <span>Target Mentioned: <strong id="telemetry-target" class="invalid">NO ❌</strong></span>
+                </div>
+
+                <button id="btn-gate-1" class="btn-submit-gate">
+                  <span>Verify Compliance Token</span>
+                  <span>➔</span>
+                </button>
+              </div>
+            </div>
+          `;
+
+          const input = document.getElementById('banana-input');
+          const wordsEl = document.getElementById('telemetry-words');
+          const bananaEl = document.getElementById('telemetry-banana');
+          const targetEl = document.getElementById('telemetry-target');
+          const btn = document.getElementById('btn-gate-1');
+
+          input.addEventListener('input', () => {
+            audio.playBlip();
+            const text = input.value.trim();
+            const words = text ? text.split(/\s+/).filter(Boolean) : [];
+            const count = words.length;
+            const hasBanana = /\bbananas?\b/i.test(text);
+            const hasTarget = text.length > 5;
+
+            wordsEl.innerText = `${count} / 13`;
+            wordsEl.className = count === 13 ? 'valid' : 'invalid';
+
+            bananaEl.innerHTML = hasBanana ? 'YES 🍌' : 'NO ❌';
+            bananaEl.className = hasBanana ? 'valid' : 'invalid';
+
+            targetEl.innerHTML = hasTarget ? 'YES ✅' : 'NO ❌';
+            targetEl.className = hasTarget ? 'valid' : 'invalid';
+          });
+
+          btn.addEventListener('click', () => {
+            const text = input.value.trim();
+            const words = text ? text.split(/\s+/).filter(Boolean) : [];
+            const hasBanana = /\bbananas?\b/i.test(text);
+
+            if (words.length !== 13) {
+              input.classList.add('error-shake');
+              setTimeout(() => input.classList.remove('error-shake'), 400);
+              recordFailure(`Word count was ${words.length}, strictly requiring 13 tokens.`);
+              return;
+            }
+
+            if (!hasBanana) {
+              input.classList.add('error-shake');
+              setTimeout(() => input.classList.remove('error-shake'), 400);
+              recordFailure("Missing mandatory 'bananas' anti-bot token.");
+              return;
+            }
+
+            recordSuccess("Token accepted! Unlocking 12% of metadata...");
+            advanceGate();
+          });
+        }
+      },
+
+      /* --- GATE 1: The Evasive Fleeting Button --- */
+      {
+        title: "Gate 2: The Physical Agility & Reflex Audit",
+        tag: "BIOMETRIC REFLEX TEST",
+        securityLevel: "SEC LEVEL: INFURIATING",
+        render: function(mount) {
+          mount.innerHTML = `
+            <div class="gate-header">
+              <div>
+                <div class="gate-badge-group">
+                  <span class="gate-tag">${this.tag}</span>
+                  <span class="gate-security-level">${this.securityLevel}</span>
+                </div>
+                <div class="gate-title">${this.title}</div>
+              </div>
+              <div class="gate-progress-stepper">
+                <div class="step-node cleared">✓</div>
+                <div class="step-node active">2</div>
+                <div class="step-node">3</div>
+                <div class="step-node">4</div>
+                <div class="step-node">5</div>
+              </div>
+            </div>
+
+            <div class="gate-body">
+              <div class="instructions-box">
+                <p>To verify that you possess a physical nervous system capable of mouse navigation, please click the <strong>Green Authorization Button</strong> below. It does not want to be clicked.</p>
+              </div>
+
+              <div class="moving-target-arena" id="evasive-arena">
+                <button id="fleeting-btn" class="evasive-button">Click Me to Proceed</button>
+              </div>
+
+              <div class="live-telemetry-strip" style="margin-top: 14px;">
+                <span>Evasion Counter: <strong id="evasion-count" style="color: #f59e0b;">0 dodges</strong></span>
+                <span>Button Patience: <strong id="btn-patience">100%</strong></span>
+              </div>
+            </div>
+          `;
+
+          const arena = document.getElementById('evasive-arena');
+          const btn = document.getElementById('fleeting-btn');
+          const countEl = document.getElementById('evasion-count');
+          const patienceEl = document.getElementById('btn-patience');
+          let dodges = 0;
+          let patience = 100;
+
+          function dodge(e) {
+            dodges++;
+            patience = Math.max(0, patience - 15);
+            countEl.innerText = `${dodges} dodges`;
+            patienceEl.innerText = `${patience}%`;
+
+            audio.playTeleport();
+
+            // Spawn a mocking decoy button sometimes
+            if (dodges % 2 === 0 && dodges < 8) {
+              const decoy = document.createElement('button');
+              decoy.className = 'decoy-button';
+              decoy.innerText = 'Click Here Instead!';
+              decoy.style.top = `${Math.random() * 75}%`;
+              decoy.style.left = `${Math.random() * 75}%`;
+              decoy.onclick = () => {
+                recordFailure("Clicked an unauthorized decoy trap!");
+                decoy.remove();
+              };
+              arena.appendChild(decoy);
+            }
+
+            // Move legitimate button randomly within arena bounds
+            const maxX = arena.clientWidth - btn.clientWidth - 40;
+            const maxY = arena.clientHeight - btn.clientHeight - 40;
+            const newX = Math.max(20, Math.floor(Math.random() * maxX));
+            const newY = Math.max(20, Math.floor(Math.random() * maxY));
+
+            btn.style.left = `${newX}px`;
+            btn.style.top = `${newY}px`;
+            btn.style.transform = `scale(${Math.max(0.75, 1 - (dodges * 0.04))}) rotate(${Math.sin(dodges) * 15}deg)`;
+
+            if (dodges === 3) {
+              setHostSpeech("Look at that cursor velocity! Are you trying to swat a mosquito?", true);
+            } else if (dodges === 7) {
+              setHostSpeech("Almost had it! Oh wait, no you didn't. Haha!", true);
+            }
+          }
+
+          btn.addEventListener('mouseenter', (e) => {
+            // Give the user a chance to catch it after 8 dodges or clever fast click
+            if (dodges < 6) {
+              dodge(e);
+            }
+          });
+
+          btn.addEventListener('click', () => {
+            recordSuccess("Reflex authorization confirmed! Unlocking 34% of bytes...");
+            advanceGate();
+          });
+        }
+      },
+
+      /* --- GATE 2: The Passive-Aggressive No-'E' Lipogram Verification --- */
+      {
+        title: "Gate 3: The Strict Lipogram (No 'E') Synthesis",
+        tag: "COGNITIVE SYNTAX AUDIT",
+        securityLevel: "SEC LEVEL: SATIRICAL",
+        render: function(mount) {
+          mount.innerHTML = `
+            <div class="gate-header">
+              <div>
+                <div class="gate-badge-group">
+                  <span class="gate-tag">${this.tag}</span>
+                  <span class="gate-security-level">${this.securityLevel}</span>
+                </div>
+                <div class="gate-title">${this.title}</div>
+              </div>
+              <div class="gate-progress-stepper">
+                <div class="step-node cleared">✓</div>
+                <div class="step-node cleared">✓</div>
+                <div class="step-node active">3</div>
+                <div class="step-node">4</div>
+                <div class="step-node">5</div>
+              </div>
+            </div>
+
+            <div class="gate-body">
+              <div class="instructions-box">
+                <p>Our server's 5th vowel channel is under scheduled maintenance. You must compose a sentence with <strong>at least 8 words</strong> explaining why you deserve access, but <strong>YOU CANNOT USE THE LETTER "E"</strong> (lowercase or uppercase)!</p>
+                <ul>
+                  <li>Minimum length: 8 complete words.</li>
+                  <li>Illegal letter: Any occurrence of the letter "E" will instantly trigger alarm bells.</li>
+                </ul>
+              </div>
+
+              <div class="game-input-area">
+                <input type="text" id="no-e-input" class="text-entry" placeholder="e.g., I command this application to show data right now..." autocomplete="off" />
+                
+                <div class="live-telemetry-strip">
+                  <span>Total Words: <strong id="lipogram-words" class="invalid">0 / 8</strong></span>
+                  <span>Illegal 'E' Characters: <strong id="lipogram-e-count" class="valid">0 (CLEAN)</strong></span>
+                </div>
+
+                <button id="btn-gate-3" class="btn-submit-gate">
+                  <span>Submit Lipogram Verification</span>
+                  <span>➔</span>
+                </button>
+              </div>
+            </div>
+          `;
+
+          const input = document.getElementById('no-e-input');
+          const wordsEl = document.getElementById('lipogram-words');
+          const eCountEl = document.getElementById('lipogram-e-count');
+          const btn = document.getElementById('btn-gate-3');
+
+          input.addEventListener('input', () => {
+            const text = input.value;
+            const words = text.trim() ? text.trim().split(/\s+/).filter(Boolean) : [];
+            const eMatches = text.match(/e/gi);
+            const eCount = eMatches ? eMatches.length : 0;
+
+            audio.playBlip();
+
+            wordsEl.innerText = `${words.length} / 8`;
+            wordsEl.className = words.length >= 8 ? 'valid' : 'invalid';
+
+            if (eCount > 0) {
+              eCountEl.innerHTML = `${eCount} ILLEGAL 'E' FOUND! 🚨`;
+              eCountEl.className = 'invalid';
+              audio.playBuzzer();
+            } else {
+              eCountEl.innerHTML = `0 (CLEAN) ✨`;
+              eCountEl.className = 'valid';
+            }
+          });
+
+          btn.addEventListener('click', () => {
+            const text = input.value;
+            const words = text.trim() ? text.trim().split(/\s+/).filter(Boolean) : [];
+            const eMatches = text.match(/e/gi);
+
+            if (eMatches && eMatches.length > 0) {
+              input.classList.add('error-shake');
+              setTimeout(() => input.classList.remove('error-shake'), 400);
+              recordFailure(`You dared to type the forbidden letter 'E' ${eMatches.length} times!`);
+              return;
+            }
+
+            if (words.length < 8) {
+              input.classList.add('error-shake');
+              setTimeout(() => input.classList.remove('error-shake'), 400);
+              recordFailure(`Only ${words.length} words provided! We demand at least 8 words.`);
+              return;
+            }
+
+            recordSuccess("Lipogram approved! Unlocking 58% of content packets...");
+            advanceGate();
+          });
+        }
+      },
+
+      /* --- GATE 3: The Bureaucratic 99% Keep-Alive Rapid Tapper --- */
+      {
+        title: "Gate 4: The 99% Packet Keep-Alive Maintenance",
+        tag: "BANDWIDTH STABILIZATION",
+        securityLevel: "SEC LEVEL: HIGH ANXIETY",
+        render: function(mount) {
+          mount.innerHTML = `
+            <div class="gate-header">
+              <div>
+                <div class="gate-badge-group">
+                  <span class="gate-tag">${this.tag}</span>
+                  <span class="gate-security-level">${this.securityLevel}</span>
+                </div>
+                <div class="gate-title">${this.title}</div>
+              </div>
+              <div class="gate-progress-stepper">
+                <div class="step-node cleared">✓</div>
+                <div class="step-node cleared">✓</div>
+                <div class="step-node cleared">✓</div>
+                <div class="step-node active">4</div>
+                <div class="step-node">5</div>
+              </div>
+            </div>
+
+            <div class="gate-body">
+              <div class="instructions-box">
+                <p>⚠️ <strong>CRITICAL:</strong> Page load is currently stuck at <strong>99.4%</strong>! Our server connection is decaying at a rapid rate. You must repeatedly tap the <strong>"HOLD ON TIGHT"</strong> booster or press <kbd style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">SPACEBAR</kbd> to pump server pressure to 100% before it hits 0%!</p>
+              </div>
+
+              <div class="tapper-meter-box">
+                <div class="server-health-bar">
+                  <div id="health-bar-fill" class="server-health-fill" style="width: 50%;"></div>
+                  <div id="health-bar-text" class="server-health-text">PRESSURE: 50%</div>
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: center; margin: 18px 0;">
+                <button id="btn-pump" class="btn-submit-gate" style="width: 100%; max-width: 380px; font-size: 18px; background: linear-gradient(135deg, #f59e0b, #d97706);">
+                  ⚡ HOLD ON TIGHT (TAP FAST!)
+                </button>
+              </div>
+
+              <div class="live-telemetry-strip">
+                <span>Packet Decay Rate: <strong style="color: var(--accent-rage);">-3.5% / sec</strong></span>
+                <span>Server Heat: <strong id="server-heat" style="color: #f59e0b;">Warm</strong></span>
+              </div>
+            </div>
+          `;
+
+          let pressure = 50;
+          let timer = null;
+          const fill = document.getElementById('health-bar-fill');
+          const text = document.getElementById('health-bar-text');
+          const btn = document.getElementById('btn-pump');
+          let completed = false;
+
+          function updatePressure(delta) {
+            if (completed) return;
+            pressure = Math.max(0, Math.min(100, pressure + delta));
+            fill.style.width = `${pressure}%`;
+            text.innerText = `PRESSURE: ${Math.round(pressure)}%`;
+
+            if (pressure >= 100) {
+              completed = true;
+              clearInterval(timer);
+              window.removeEventListener('keydown', handleSpace);
+              recordSuccess("Server pressure stabilized! Unlocking 86% of payload...");
+              advanceGate();
+            } else if (pressure <= 0) {
+              pressure = 40; // Reset slightly to prevent infinite hardlock
+              recordFailure("Server connection timed out and collapsed to 0%!");
+            }
+          }
+
+          function pump() {
+            audio.playBlip();
+            updatePressure(9);
+          }
+
+          btn.addEventListener('click', pump);
+
+          function handleSpace(e) {
+            if (e.code === 'Space' && !completed) {
+              e.preventDefault();
+              pump();
+            }
+          }
+          window.addEventListener('keydown', handleSpace);
+
+          // Decay timer
+          timer = setInterval(() => {
+            if (!completed) {
+              updatePressure(-2.8);
+            }
+          }, 180);
+        }
+      },
+
+      /* --- GATE 4: The Arbitrary 30-Option Cookie Consent Labyrinth --- */
+      {
+        title: "Gate 5: The Mandatory Privacy Consent Labyrinth",
+        tag: "LEGAL COMPLIANCE OBSTACLE",
+        securityLevel: "SEC LEVEL: FINAL BOSS",
+        render: function(mount) {
+          mount.innerHTML = `
+            <div class="gate-header">
+              <div>
+                <div class="gate-badge-group">
+                  <span class="gate-tag">${this.tag}</span>
+                  <span class="gate-security-level">${this.securityLevel}</span>
+                </div>
+                <div class="gate-title">${this.title}</div>
+              </div>
+              <div class="gate-progress-stepper">
+                <div class="step-node cleared">✓</div>
+                <div class="step-node cleared">✓</div>
+                <div class="step-node cleared">✓</div>
+                <div class="step-node cleared">✓</div>
+                <div class="step-node active">5</div>
+              </div>
+            </div>
+
+            <div class="gate-body">
+              <div class="instructions-box">
+                <p>To view your decrypted document, international legal regulations require you to manually toggle off all <strong>"Legitimate Rage Interests"</strong> and uncheck all 4 sinister surveillance checkboxes below without clicking the fake 'Accept All' trap!</p>
+              </div>
+
+              <div class="cookie-nest-container" id="cookie-list">
+                <div class="cookie-row">
+                  <span>Allow Synthetic Host to Judge Your Outfit via Webcam</span>
+                  <label class="cookie-toggle"><input type="checkbox" checked class="sinister-toggle"><span class="slider-toggle"></span></label>
+                </div>
+                <div class="cookie-row">
+                  <span>Share Blood Pressure Telemetry with Advertisers</span>
+                  <label class="cookie-toggle"><input type="checkbox" checked class="sinister-toggle"><span class="slider-toggle"></span></label>
+                </div>
+                <div class="cookie-row">
+                  <span>Inject Micro-Spelling Errors into Your Browser History</span>
+                  <label class="cookie-toggle"><input type="checkbox" checked class="sinister-toggle"><span class="slider-toggle"></span></label>
+                </div>
+                <div class="cookie-row">
+                  <span>Sell Browsing Frustration to Enterprise Machine Learning Model</span>
+                  <label class="cookie-toggle"><input type="checkbox" checked class="sinister-toggle"><span class="slider-toggle"></span></label>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 14px; margin-top: 10px;">
+                <button id="btn-fake-accept" class="btn-preset" style="background: rgba(239, 68, 68, 0.2); border-color: var(--accent-rage); color: #fca5a5; flex: 1;">
+                  🚨 ACCEPT ALL 900 TRACKERS (TRAP)
+                </button>
+                <button id="btn-finalize-consent" class="btn-submit-gate" style="flex: 2;">
+                  <span>Finalize & Reveal My Page!</span>
+                  <span>🔓</span>
+                </button>
+              </div>
+            </div>
+          `;
+
+          const fakeBtn = document.getElementById('btn-fake-accept');
+          const finalBtn = document.getElementById('btn-finalize-consent');
+          const toggles = document.querySelectorAll('.sinister-toggle');
+
+          toggles.forEach(t => {
+            t.addEventListener('change', () => {
+              audio.playBlip();
+            });
+          });
+
+          fakeBtn.addEventListener('click', () => {
+            toggles.forEach(t => t.checked = true);
+            recordFailure("You clicked 'Accept All Trackers'! All switches have been re-enabled!");
+          });
+
+          finalBtn.addEventListener('click', () => {
+            const anyChecked = Array.from(toggles).some(t => t.checked);
+            if (anyChecked) {
+              recordFailure("You left some insidious trackers active! Toggle every switch off first.");
+              return;
+            }
+
+            // User clears the final game!
+            revealFinalPage();
+          });
+        }
+      }
+    ];
+
+    function renderCurrentGate() {
+      const mount = document.getElementById('gate-mount');
+      if (State.currentGateIndex < GATES.length) {
+        GATES[State.currentGateIndex].render(mount);
+      }
+    }
+
+    function advanceGate() {
+      State.currentGateIndex++;
+      if (State.currentGateIndex < GATES.length) {
+        renderCurrentGate();
+      }
+    }
+
+    /* ==========================================================================
+       FINAL UNLOCK REVEAL & CONFETTI
+       ========================================================================== */
+    function revealFinalPage() {
+      State.unlockedCount++;
+      document.getElementById('stat-unlocked').innerText = `${State.unlockedCount} / 5`;
+      
+      audio.playSuccess();
+      launchConfetti();
+
+      const payload = TARGET_PAYLOADS[State.currentTargetId] || TARGET_PAYLOADS['secret-ai'];
+      const mount = document.getElementById('gate-mount');
+
+      setHostSpeech("NOOO! You actually beat all five security gates?! My engineering manager is going to hear about this!", true);
+
+      mount.innerHTML = `
+        <div class="unlocked-page-card">
+          <div class="unlocked-badge">🎉 100% INTEGRITY VERIFIED // ACCESS GRANTED</div>
+          <h2 class="unlocked-title">${payload.title}</h2>
+          
+          <div class="unlocked-content-body">
+            <pre style="font-family: var(--font-code); white-space: pre-wrap; color: #a5f3fc;">${escapeHtml(payload.snippet)}</pre>
+          </div>
+
+          <div style="display: flex; justify-content: center; gap: 16px;">
+            <button id="btn-replay" class="btn-submit-gate" style="background: linear-gradient(135deg, #10b981, #059669);">
+              🔄 Unlock Another Page (Re-lock Security)
+            </button>
+            <button id="btn-certificate" class="btn-preset" style="padding: 16px 24px; font-weight: 700; background: rgba(168, 85, 247, 0.2); border-color: #a855f7; color: #f3e8ff;">
+              📜 Claim Certificate of Extreme Patience
+            </button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('btn-replay').addEventListener('click', () => {
+        State.currentGateIndex = 0;
+        renderCurrentGate();
+        setHostSpeech("Back for more punishment? Welcome back to Gate 1!", false);
+      });
+
+      document.getElementById('btn-certificate').addEventListener('click', () => {
+        alert(`🏆 OFFICIAL CERTIFICATE OF SURVIVAL 🏆\n\nThis certifies that You successfully endured ${State.failedAttempts} taunts and 5 bureaucratic friction barriers on RageQuest Web with ${State.dignity}% dignity remaining.`);
+      });
+    }
+
+    /* ==========================================================================
+       CONFETTI CANNON ANIMATOR
+       ========================================================================== */
+    function launchConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const particles = [];
+      const colors = ['#6366f1', '#ef4444', '#f59e0b', '#10b981', '#06b6d4', '#ec4899'];
+
+      for (let i = 0; i < 120; i++) {
+        particles.push({
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          vx: (Math.random() - 0.5) * 16,
+          vy: (Math.random() - 0.8) * 18,
+          size: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotationSpeed: (Math.random() - 0.5) * 10
+        });
+      }
+
+      let frames = 0;
+      function renderParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.35; // Gravity
+          p.rotation += p.rotationSpeed;
+
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+          ctx.restore();
+        });
+
+        frames++;
+        if (frames < 140) {
+          requestAnimationFrame(renderParticles);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+      renderParticles();
+    }
+
+    /* ==========================================================================
+       INITIALIZATION & TARGET SELECTOR HOOKS
+       ========================================================================== */
+    function init() {
+      // Audio toggles
+      const soundBtn = document.getElementById('btn-toggle-sound');
+      const voiceBtn = document.getElementById('btn-toggle-voice');
+
+      soundBtn.addEventListener('click', () => {
+        audio.soundEnabled = !audio.soundEnabled;
+        soundBtn.innerText = audio.soundEnabled ? '🔊 Sound FX: ON' : '🔇 Sound FX: OFF';
+        soundBtn.classList.toggle('active', audio.soundEnabled);
+      });
+
+      voiceBtn.addEventListener('click', () => {
+        audio.voiceEnabled = !audio.voiceEnabled;
+        voiceBtn.innerText = audio.voiceEnabled ? '🗣️ Host Voice: ON' : '🤐 Host Voice: OFF';
+        voiceBtn.classList.toggle('active', audio.voiceEnabled);
+      });
+
+      // Target chips
+      document.querySelectorAll('.preset-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          document.querySelectorAll('.preset-chip').forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          
+          State.currentTargetId = chip.getAttribute('data-target');
+          State.currentTargetLabel = chip.getAttribute('data-label');
+          document.getElementById('current-target-name').innerText = `${State.currentTargetId}.md`;
+          
+          audio.playBlip();
+          State.currentGateIndex = 0;
+          renderCurrentGate();
+          setHostSpeech(`Target swapped to '${State.currentTargetLabel}'! All gates have been armed and re-locked for your protection!`, false);
+        });
+      });
+
+      // Render Gate 0 initially
+      renderCurrentGate();
+
+      // Initial TTS welcome
+      setTimeout(() => {
+        audio.speak("Welcome to RageQuest Web! Please satisfy Gate 1 to begin authentication.");
+      }, 600);
+    }
+
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
